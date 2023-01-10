@@ -58,3 +58,22 @@ function gotStream(stream) {
 function handleError(error) {
   console.error('Error: ', error);
 }
+
+function capture() {
+  const video = document.querySelector("video");
+  const canvas = document.createElement("canvas");
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas
+    .getContext("2d")
+    .drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+
+  const link = document.createElement('a');
+  link.download = 'photo.png';
+  link.href = canvas.toDataURL()
+  link.click();
+  
+  link.remove();
+  canvas.remove();
+}
+
